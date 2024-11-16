@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_percent.c                                 :+:      :+:    :+:   */
+/*   ft_print_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,44 +11,45 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// --------------------------PROTOTYPE--------------------------
-void	ft_print_percent(t_flags *flags, const char **format);
-void	ft_parse_percent(t_flags *flags, int spaces);
-// -------------------------------------------------------------
+// ---------------------------PROTOTYPE--------------------------
+void	ft_print_s(char *s, t_flags *flags, const char **format);
+void	ft_parse_s(char *s, t_flags *flags, int spaces, int len);
+// --------------------------------------------------------------
 
-void	ft_print_percent(t_flags *flags, const char **format)
+void	ft_print_s(char *s, t_flags *flags, const char **format)
 {
 	int	width;
 	int	spaces;
+	int	len;
 
+	if (!s)
+		s = "(null)";
+	if (flags->precision)
+		len = ft_min(ft_strlen(s), ft_atoi(flags->s_precision));
+	else
+		len = ft_strlen(s);
 	width = ft_atoi(flags->s_width);
-	if (width <= 1)
-		width = 1;
-	spaces = width - 1;
-	ft_parse_percent(flags, spaces);
+	if (width <= len)
+		width = len;
+	spaces = width - len;
+	ft_parse_s(s, flags, spaces, len);
 	flags->count += width;
 	(*format)++;
 }
 
-void	ft_parse_percent(t_flags *flags, int spaces)
+void	ft_parse_s(char *s, t_flags *flags, int spaces, int len)
 {
 	if (flags->minus)
 	{
-		write(1, "%", 1);
-		while (spaces)
-		{
+		write(1, s, len);
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
 	}
 	else
 	{
-		while (spaces)
-		{
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
-		write(1, "%", 1);
+		write(1, s, len);
 	}
 	return ;
 }

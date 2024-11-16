@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|%23c   Hello|", '+'
+#define ARGS "|%-4.2s|", ""
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
@@ -38,6 +38,8 @@ int	ft_printf(const char *format, ...)
 				ft_print_percent(&flags, &format);
 			else if (*format == 'c')
 				ft_print_c(va_arg(args, int), &flags, &format);
+			else if (*format == 's')
+				ft_print_s(va_arg(args, char *), &flags, &format);
 		}
 		else
 			ft_print_and_count(&flags, &format);
