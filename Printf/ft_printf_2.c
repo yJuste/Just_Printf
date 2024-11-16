@@ -91,7 +91,7 @@ void	ft_flags_init(t_flags *flags)
 	flags->hashtag = 0;
 	flags->plus = 0;
 	flags->width = 0;
-	while (i < 15)
+	while (i < 20)
 	{
 		flags->s_width[i] = '\0';
 		flags->s_precision[i] = '\0';

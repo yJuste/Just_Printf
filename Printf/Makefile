@@ -8,7 +8,10 @@ SRC =	ft_printf.c		\
 	ft_print_percent.c	\
 	ft_print_c.c		\
 	ft_print_s.c		\
+	ft_print_p.c		\
+	ft_print_d.c		\
 	ft_printf_lib.c		\
+	ft_printf_lib_2.c	\
 
 OBJ = $(SRC:.c=.o)
 

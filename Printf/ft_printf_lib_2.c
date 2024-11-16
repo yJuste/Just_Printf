@@ -11,43 +11,27 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// --------------------------PROTOTYPE--------------------------
-void	ft_putstr(char *str);
-size_t	ft_strlen(const char *s);
-int		ft_min(int a, int b);
-void	ft_swap(char *a, char *b);
-// -------------------------------------------------------------
+// --------------------------PROTOTYPE-------------------------
+int		ft_atoi(char *str);
+// ------------------------------------------------------------
 
-void	ft_putstr(char *str)
+int	ft_atoi(char *str)
 {
-	while (*str)
-		write(1, str++, 1);
-}
+	int	sign;
+	int	res;
 
-size_t	ft_strlen(const char *s)
-{
-	size_t		i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-void	ft_swap(char *a, char *b)
-{
-	char	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	sign = 1;
+	res = 0;
+	while (*str == ' ' && (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sign = -sign;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		res = res * 10 + *str - '0';
+		str++;
+	}
+	return (sign * res);
 }

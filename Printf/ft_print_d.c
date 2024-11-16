@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_lib.c                                    :+:      :+:    :+:   */
+/*   ft_print_d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,43 +11,40 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// --------------------------PROTOTYPE--------------------------
-void	ft_putstr(char *str);
-size_t	ft_strlen(const char *s);
-int		ft_min(int a, int b);
-void	ft_swap(char *a, char *b);
-// -------------------------------------------------------------
+// -----------------------------PROTOTYPE---------------------------
 
-void	ft_putstr(char *str)
+// -----------------------------------------------------------------
+
+void	ft_putnbr(int n, int *count)
 {
-	while (*str)
-		write(1, str++, 1);
+	char		c;
+
+	if (nbr == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr = -nbr;
+		(*count)++;
+	}
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10, count);
+		ft_putnbr(nbr % 10, count);
+	}
+	else
+	{
+		c = nbr + '0';
+		write(1, &c, 1);
+		(*count)++;
+	}
 }
 
-size_t	ft_strlen(const char *s)
+void	ft_print_p(int d, t_flags *flags, const char **format)
 {
-	size_t		i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-void	ft_swap(char *a, char *b)
-{
-	char	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	ft_putnbr(d, &flags->count);
+	(*format)++;
 }

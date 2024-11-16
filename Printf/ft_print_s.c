@@ -11,18 +11,20 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// ------------------------------PROTOTYPE-----------------------------
+// -----------------------------------PROTOTYPE---------------------------------
 void	ft_print_s(char *s, t_flags *flags, const char **format);
-int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len);
+int		ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len);
 void	ft_parse_s(char *s, t_flags *flags, int spaces, int len);
-// --------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
 void	ft_print_s(char *s, t_flags *flags, const char **format)
 {
-	int	width;
-	int	spaces;
-	int	len;
+	int		width;
+	int		spaces;
+	int		len;
 
+	if (!s)
+		s = "(null)";
 	width = ft_calculate_s(s, flags, &spaces, &len);
 	ft_parse_s(s, flags, spaces, len);
 	flags->count += width;
@@ -31,10 +33,8 @@ void	ft_print_s(char *s, t_flags *flags, const char **format)
 
 int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len)
 {
-	int	width;
+	int		width;
 
-	if (!s)
-		s = "(null)";
 	if (flags->precision)
 		*len = ft_min(ft_strlen(s), ft_atoi(flags->s_precision));
 	else

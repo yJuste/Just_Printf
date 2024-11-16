@@ -18,8 +18,8 @@ void	ft_parse_c(int c, t_flags *flags, int spaces);
 
 void	ft_print_c(int c, t_flags *flags, const char **format)
 {
-	int	width;
-	int	spaces;
+	int		width;
+	int		spaces;
 
 	width = ft_atoi(flags->s_width);
 	if (width <= 1)

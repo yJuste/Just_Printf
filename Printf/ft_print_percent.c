@@ -18,8 +18,8 @@ void	ft_parse_percent(t_flags *flags, int spaces);
 
 void	ft_print_percent(t_flags *flags, const char **format)
 {
-	int	width;
-	int	spaces;
+	int		width;
+	int		spaces;
 
 	width = ft_atoi(flags->s_width);
 	if (width <= 1)
@@ -35,19 +35,13 @@ void	ft_parse_percent(t_flags *flags, int spaces)
 	if (flags->minus)
 	{
 		write(1, "%", 1);
-		while (spaces)
-		{
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
 	}
 	else
 	{
-		while (spaces)
-		{
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
 		write(1, "%", 1);
 	}
 	return ;

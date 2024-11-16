@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|%-4.2s|", "qqqqqqq"
+#define ARGS "|%2.p %p %10.p %-10p|", NULL, "hey", "hola", "yes"
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
@@ -40,6 +40,10 @@ int	ft_printf(const char *format, ...)
 				ft_print_c(va_arg(args, int), &flags, &format);
 			else if (*format == 's')
 				ft_print_s(va_arg(args, char *), &flags, &format);
+			else if (*format == 'p')
+				ft_print_p(va_arg(args, void *), &flags, &format);
+			else if (*format == 'd')
+				ft_print_d(va_arg(args, int), &flags, &format);
 		}
 		else
 			ft_print_and_count(&flags, &format);
@@ -57,9 +61,9 @@ void	ft_print_and_count(t_flags *flags, const char **format)
 
 int	main(void)
 {
-	printf("		|count : %d|", printf(ARGS));
+	printf("		|true printf, count : %d|", printf(ARGS));
 	printf("\n\\n\n");
-	printf("		|count : %d|", ft_printf(ARGS));
+	printf("		|myft_printf, count : %d|", ft_printf(ARGS));
 	printf("\n\\n\n");
 	return (0);
 }
