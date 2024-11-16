@@ -60,6 +60,7 @@ void	ft_parse_c(int c, t_flags *flags, int spaces);
 // ft_printf_s.c
 
 void	ft_print_s(char *s, t_flags *flags, const char **format);
+int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len);
 void	ft_parse_s(char *s, t_flags *flags, int spaces, int len);
 
 // ft_lib_printf.c

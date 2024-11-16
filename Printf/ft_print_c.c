@@ -35,19 +35,13 @@ void	ft_parse_c(int c, t_flags *flags, int spaces)
 	if (flags->minus)
 	{
 		write(1, &c, 1);
-		while (spaces)
-		{
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
 	}
 	else
 	{
-		while (spaces)
-		{
+		while (spaces-- > 0)
 			write(1, " ", 1);
-			spaces--;
-		}
 		write(1, &c, 1);
 	}
 	return ;
