@@ -1,11 +1,11 @@
-NAME = libftprintf.a
+NAME = libftprintf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 
 SRC =	ft_printf.c		\
 	ft_printf_2.c		\
-	ft_printf_c.c		\
+	ft_print_percent.c	\
+	ft_print_c.c		\
 	ft_printf_lib.c		\
 
 OBJ = $(SRC:.c=.o)
@@ -13,8 +13,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) -c $(SRC)
-	ar -rcs $(NAME) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ)
 
 bonus : $(NAME)
 

@@ -11,7 +11,11 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-void	ft_print_c(int c, t_flags *flags, const char *format)
+// --------------------------PROTOTYPE--------------------------
+void	ft_print_c(int c, t_flags *flags, const char **format);
+// -------------------------------------------------------------
+
+void	ft_print_c(int c, t_flags *flags, const char **format)
 {
 	(void)format;
 	if (flags->minus)
