@@ -1,6 +1,7 @@
 NAME = libftprintf
 
 CC = gcc
+CFLAGS = -g
 
 SRC =	ft_printf.c		\
 	ft_printf_2.c		\
@@ -13,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 bonus : $(NAME)
 
