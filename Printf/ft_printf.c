@@ -70,7 +70,7 @@ void	ft_print_and_count(t_flags *flags, const char **format)
 	flags->count++;
 	(*format)++;
 }
-/*
+
 int	main(void)
 {
 	printf("		|true printf, count : %d|", printf(ARGS));
@@ -78,4 +78,4 @@ int	main(void)
 	printf("		|myft_printf, count : %d|", ft_printf(ARGS));
 	printf("\n\\n\n");
 	return (0);
-}*/
+}
