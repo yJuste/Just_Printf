@@ -86,6 +86,9 @@ void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
 
 void	ft_print_d(int d, t_flags *flags, const char **format);
 void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_precision_and_null_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_next_zero_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_is_negative_d(long *d, t_flags *flags, t_decimal *dml);
 
 // ft_print_d_next.c
 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|%d|", 34
+#define ARGS "|%05.1d|", -34
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
@@ -42,6 +42,8 @@ int	ft_printf(const char *format, ...)
 				ft_print_p(va_arg(args, void *), &flags, &format);
 			else if (*format == 'd')
 				ft_print_d(va_arg(args, int), &flags, &format);
+			else if (*format == 'i')
+				ft_print_d(va_arg(args, int), &flags, &format);
 		}
 		else
 			ft_print_and_count(&flags, &format);
@@ -70,7 +72,7 @@ void	ft_print_and_count(t_flags *flags, const char **format)
 	flags->count++;
 	(*format)++;
 }
-
+/*
 int	main(void)
 {
 	printf("		|true printf, count : %d|", printf(ARGS));
@@ -78,4 +80,4 @@ int	main(void)
 	printf("		|myft_printf, count : %d|", ft_printf(ARGS));
 	printf("\n\\n\n");
 	return (0);
-}
+}*/
