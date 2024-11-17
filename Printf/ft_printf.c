@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|% d % d % d % d % d % d % d|", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42
+#define ARGS "|%d|", 34
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
