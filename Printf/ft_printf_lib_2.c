@@ -13,6 +13,7 @@
 
 // --------------------------PROTOTYPE-------------------------
 int		ft_atoi(char *str);
+void	ft_putnbr(long nbr);
 // ------------------------------------------------------------
 
 int	ft_atoi(char *str)
@@ -34,4 +35,30 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (sign * res);
+}
+
+void	ft_putnbr(long nbr)
+{
+	char		c;
+
+	if (nbr == LONG_MIN)
+	{
+		write(1, "-9223372036854775808", 20);
+		return ;
+	}
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr = -nbr;
+	}
+	if (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putnbr(nbr % 10);
+	}
+	else
+	{
+		c = nbr + '0';
+		write(1, &c, 1);
+	}
 }

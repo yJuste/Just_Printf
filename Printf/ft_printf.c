@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|%2.p %p %10.p %-10p|", NULL, "hey", "hola", "yes"
+#define ARGS "|%8d|", -3
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
+void	ft_printf_recall(t_flags *flags, const char **format);
 void	ft_print_and_count(t_flags *flags, const char **format);
 // -------------------------------------------------------------
-
 int	ft_printf(const char *format, ...)
 {
 	t_flags		flags;
@@ -30,10 +30,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			ft_flags_init(&flags);
-			ft_flags(&flags, &format);
-			ft_flags(&flags, &format);
-			ft_flags(&flags, &format);
+			ft_printf_recall(&flags, &format);
 			if (*format == '%')
 				ft_print_percent(&flags, &format);
 			else if (*format == 'c')
@@ -50,6 +47,20 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (flags.count);
+}
+
+void	ft_printf_recall(t_flags *flags, const char **format)
+{
+	int	i;
+
+	i = 0;
+	ft_flags_init(flags);
+	while (i < 10)
+	{
+		ft_flags(flags, format);
+		i++;
+	}
+	return ;
 }
 
 void	ft_print_and_count(t_flags *flags, const char **format)

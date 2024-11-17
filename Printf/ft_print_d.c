@@ -11,40 +11,111 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// -----------------------------PROTOTYPE---------------------------
+// ---------------------------------PROTOTYPE--------------------------------
+void	ft_print_d(int d, t_flags *flags, const char **format);
+void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_d(long d, t_flags *flags, t_decimal *dml);
+// --------------------------------------------------------------------------
 
-// -----------------------------------------------------------------
-
-void	ft_putnbr(int n, int *count)
+void	ft_print_d(int d, t_flags *flags, const char **format)
 {
-	char		c;
+	t_decimal	dml;
 
-	if (nbr == -2147483648)
+	dml.width = 0;
+	dml.spaces = 0;
+	dml.len = 0;
+	dml.precision = 0;
+	ft_calculate_d((long)d, flags, &dml);
+	ft_parse_d((long)d, flags, &dml);
+	(*format)++;
+}
+
+void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml)
+{
+	dml->len = ft_intlen(d);
+	if (d < 0)
+		dml->len--;
+	dml->width = ft_atoi(flags->s_width);
+	dml->precision = ft_atoi(flags->s_precision);
+	if (dml->precision > dml->len)
+		dml->precision -= dml->len;
+	else
+		dml->precision = 0;
+	dml->spaces = dml->width - (dml->len + dml->precision);
+	if (dml->spaces < 0)
+		dml->spaces = 0;
+}
+
+void	ft_parse_d(long d, t_flags *flags, t_decimal *dml)
+{
+	if (flags->minus)
 	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (nbr < 0)
-	{
-		write(1, "-", 1);
-		nbr = -nbr;
-		(*count)++;
-	}
-	if (nbr >= 10)
-	{
-		ft_putnbr(nbr / 10, count);
-		ft_putnbr(nbr % 10, count);
+		if (d < 0)
+		{
+			d = -d;
+			write(1, "-", 1);
+			flags->count++;
+			dml->spaces--;
+		}
+		while (dml->precision-- > 0)
+		{
+			write(1, "0", 1);
+			flags->count++;
+		}
+		ft_putnbr((long)d);
+		flags->count += ft_intlen(d);
+		while (dml->spaces-- > 0)
+		{
+			write(1, " ", 1);
+			flags->count++;
+		}
 	}
 	else
 	{
-		c = nbr + '0';
-		write(1, &c, 1);
-		(*count)++;
+		if (flags->zero)
+		{
+			if (d < 0)
+			{
+				d = -d;
+				write(1, "-", 1);
+				flags->count++;
+				dml->spaces--;
+			}
+			while (dml->spaces-- > 0)
+			{
+				write(1, "0", 1);
+				flags->count++;
+			}
+		}
+		else
+		{
+			if (d < 0)
+			{
+				dml->spaces--;
+				while (dml->spaces-- > 0)
+				{
+					write(1, " ", 1);
+					flags->count++;
+				}
+				write(1, "-", 1);
+				d = -d;
+				flags->count++;
+			}
+			else
+			{
+				while (dml->spaces-- > 0)
+				{
+					write(1, " ", 1);
+					flags->count++;
+				}
+			}
+		}
+		while (dml->precision-- > 0)
+		{
+			write(1, "0", 1);
+			flags->count++;
+		}
+		ft_putnbr((long)d);
+		flags->count += ft_intlen(d);
 	}
-}
-
-void	ft_print_p(int d, t_flags *flags, const char **format)
-{
-	ft_putnbr(d, &flags->count);
-	(*format)++;
 }

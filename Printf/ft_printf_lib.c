@@ -11,17 +11,41 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// --------------------------PROTOTYPE--------------------------
-void	ft_putstr(char *str);
-size_t	ft_strlen(const char *s);
+// ------------PROTOTYPE----------------
 int		ft_min(int a, int b);
-void	ft_swap(char *a, char *b);
-// -------------------------------------------------------------
+int		ft_intlen(long n);
+size_t	ft_strlen(const char *s);
+void	ft_putstr(char *str);
+void	ft_swap_extra(char *a, char *b);
+// -------------------------------------
 
-void	ft_putstr(char *str)
+int	ft_min(int a, int b)
 {
-	while (*str)
-		write(1, str++, 1);
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	ft_intlen(long n)
+{
+	int	len;
+
+	len = 0;
+	if (n == LONG_MIN)
+		return (20);
+	if (n < 0)
+	{
+		n = -n;
+		len++;
+	}
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
 }
 
 size_t	ft_strlen(const char *s)
@@ -36,14 +60,13 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_min(int a, int b)
+void	ft_putstr(char *str)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	while (*str)
+		write(1, str++, 1);
 }
 
-void	ft_swap(char *a, char *b)
+void	ft_swap_extra(char *a, char *b)
 {
 	char	temp;
 

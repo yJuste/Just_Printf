@@ -20,8 +20,8 @@ void	ft_flags_init(t_flags *flags);
 
 void	ft_flags(t_flags *flags, const char **format)
 {
-	if (**format >= '0' && **format <= '9')
-		ft_flags_next(flags, format, 1, 0);
+	if (**format == '0' && !flags->zero)
+		ft_flags_next_2(flags, format, 1);
 	else if (**format == ' ')
 		ft_flags_next_2(flags, format, 2);
 	else if (**format == '+')
@@ -30,8 +30,8 @@ void	ft_flags(t_flags *flags, const char **format)
 		ft_flags_next_2(flags, format, 4);
 	else if (**format == '#')
 		ft_flags_next_2(flags, format, 5);
-	else if (**format == '0')
-		ft_flags_next_2(flags, format, 6);
+	else if (**format >= '0' && **format <= '9')
+		ft_flags_next(flags, format, 6, 0);
 	else if (**format == '.')
 		ft_flags_next(flags, format, 7, 0);
 	return ;
@@ -39,7 +39,7 @@ void	ft_flags(t_flags *flags, const char **format)
 
 void	ft_flags_next(t_flags *flags, const char **format, int i, int k)
 {
-	if (i == 1)
+	if (i == 6)
 	{
 		flags->width++;
 		while (**format >= '0' && **format <= '9')
@@ -66,7 +66,9 @@ void	ft_flags_next(t_flags *flags, const char **format, int i, int k)
 
 void	ft_flags_next_2(t_flags *flags, const char **format, int i)
 {
-	if (i == 2)
+	if (i == 1)
+		flags->zero = 1;
+	else if (i == 2)
 		flags->space = 1;
 	else if (i == 3)
 		flags->plus = 1;
@@ -74,8 +76,6 @@ void	ft_flags_next_2(t_flags *flags, const char **format, int i)
 		flags->minus = 1;
 	else if (i == 5)
 		flags->hashtag = 1;
-	else if (i == 6)
-		flags->zero = 1;
 	(*format)++;
 }
 

@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <limits.h>
 
 // Structure
 
@@ -32,12 +33,22 @@ typedef struct s_flags
 	int		precision;
 	char	s_width[20];
 	char	s_precision[20];
+	char	s_zero[500];
 	int		count;
 }	t_flags;
+
+typedef struct s_decimal
+{
+	int		width;
+	int		spaces;
+	int		len;
+	int		precision;
+}	t_decimal;
 
 // ft_printf.c
 
 int		ft_printf(const char *format, ...);
+void	ft_printf_recall(t_flags *flags, const char **format);
 void	ft_print_and_count(t_flags *flags, const char **format);
 
 // ft_printf_2.c
@@ -71,15 +82,23 @@ void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
 void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces);
 void	ft_p_to_hex(unsigned long int ptr, char *hexa);
 
+// ft_print_d.c
+
+void	ft_print_d(int d, t_flags *flags, const char **format);
+void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_d(long d, t_flags *flags, t_decimal *dml);
+
 // ft_printf_lib.c
 
-void	ft_putstr(char *str);
-size_t	ft_strlen(const char *s);
 int		ft_min(int a, int b);
-void	ft_swap(char *a, char *b);
+int		ft_intlen(long n);
+size_t	ft_strlen(const char *s);
+void	ft_putstr(char *str);
+void	ft_swap_extra(char *a, char *b);
 
 // ft_printf_lib_2.c
 
 int		ft_atoi(char *str);
+void	ft_putnbr(long nbr);
 
 #endif

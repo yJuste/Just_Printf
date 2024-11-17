@@ -59,7 +59,7 @@ void	ft_p_to_hex(unsigned long int ptr, char *hexa)
 	j = 0;
 	while (j < i / 2)
 	{
-		ft_swap(&hexa[j], &hexa[i - j - 1]);
+		ft_swap_extra(&hexa[j], &hexa[i - j - 1]);
 		j++;
 	}
 }
