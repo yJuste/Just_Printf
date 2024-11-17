@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-#define ARGS "|%8d|", -3
+#define ARGS "|% d % d % d % d % d % d % d|", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42
 
 // --------------------------PROTOTYPE--------------------------
 int		ft_printf(const char *format, ...);
@@ -69,7 +69,7 @@ void	ft_print_and_count(t_flags *flags, const char **format)
 	flags->count++;
 	(*format)++;
 }
-
+/*
 int	main(void)
 {
 	printf("		|true printf, count : %d|", printf(ARGS));
@@ -77,4 +77,4 @@ int	main(void)
 	printf("		|myft_printf, count : %d|", ft_printf(ARGS));
 	printf("\n\\n\n");
 	return (0);
-}
+}*/

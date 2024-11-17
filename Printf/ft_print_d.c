@@ -50,6 +50,15 @@ void	ft_parse_d(long d, t_flags *flags, t_decimal *dml)
 {
 	if (flags->minus)
 	{
+		if (flags->space)
+		{
+			if (d > 0)
+			{
+				write(1, " ", 1);
+				flags->count++;
+				dml->spaces--;
+			}
+		}
 		if (d < 0)
 		{
 			d = -d;
@@ -72,6 +81,15 @@ void	ft_parse_d(long d, t_flags *flags, t_decimal *dml)
 	}
 	else
 	{
+		if (flags->space)
+		{
+			if (d >= 0)
+			{
+				write(1, " ", 1);
+				flags->count++;
+				dml->spaces--;
+			}
+		}
 		if (flags->zero)
 		{
 			if (d < 0)

@@ -69,7 +69,12 @@ void	ft_flags_next_2(t_flags *flags, const char **format, int i)
 	if (i == 1)
 		flags->zero = 1;
 	else if (i == 2)
+	{
 		flags->space = 1;
+		while (**format == ' ')
+			(*format)++;
+		return ;
+	}
 	else if (i == 3)
 		flags->plus = 1;
 	else if (i == 4)
