@@ -77,16 +77,23 @@ void	ft_parse_s(char *s, t_flags *flags, int spaces, int len);
 // ft_print_p.c
 
 void	ft_print_p(void *p, t_flags *flags, const char **format);
-int		ft_calculate_p(t_flags *flags, int *spaces, int len);
-void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
 void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces);
 void	ft_p_to_hex(unsigned long int ptr, char *hexa);
+int		ft_calculate_p(t_flags *flags, int *spaces, int len);
+void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
 
 // ft_print_d.c
 
 void	ft_print_d(int d, t_flags *flags, const char **format);
 void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
+
+// ft_print_d_next.c
+
 void	ft_parse_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_minus_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_d(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_flags_space_and_plus_d(long d, t_flags *flags, t_decimal *dml);
 
 // ft_printf_lib.c
 

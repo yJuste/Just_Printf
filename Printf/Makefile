@@ -10,6 +10,7 @@ SRC =	ft_printf.c		\
 	ft_print_s.c		\
 	ft_print_p.c		\
 	ft_print_d.c		\
+	ft_print_d_next.c	\
 	ft_printf_lib.c		\
 	ft_printf_lib_2.c	\
 

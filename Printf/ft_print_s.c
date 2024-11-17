@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// -----------------------------------PROTOTYPE---------------------------------
+// -----------------------------------PROTOTYPE--------------------------------
 void	ft_print_s(char *s, t_flags *flags, const char **format);
 int		ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len);
 void	ft_parse_s(char *s, t_flags *flags, int spaces, int len);
-// -----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void	ft_print_s(char *s, t_flags *flags, const char **format)
 {

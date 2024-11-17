@@ -18,6 +18,7 @@ int		ft_printf(const char *format, ...);
 void	ft_printf_recall(t_flags *flags, const char **format);
 void	ft_print_and_count(t_flags *flags, const char **format);
 // -------------------------------------------------------------
+
 int	ft_printf(const char *format, ...)
 {
 	t_flags		flags;

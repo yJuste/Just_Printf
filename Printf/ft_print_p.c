@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// -----------------------------PROTOTYPE---------------------------
+// -------------------------------PROTOTYPE------------------------------
 void	ft_print_p(void *p, t_flags *flags, const char **format);
-int		ft_calculate_p(t_flags *flags, int *spaces, int len);
-void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
 void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces);
 void	ft_p_to_hex(unsigned long int ptr, char *hexa);
-// -----------------------------------------------------------------
+int		ft_calculate_p(t_flags *flags, int *spaces, int len);
+void	ft_parse_p(char *hexa, t_flags *flags, int spaces, int len);
+// ----------------------------------------------------------------------
 
 void	ft_print_p(void *p, t_flags *flags, const char **format)
 {
@@ -34,6 +34,31 @@ void	ft_print_p(void *p, t_flags *flags, const char **format)
 	width = ft_calculate_p(flags, &spaces, len);
 	ft_parse_p(hexa, flags, spaces, len);
 	flags->count += width;
+	(*format)++;
+}
+
+void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces)
+{
+	int		len;
+	int		temp;
+
+	len = 2;
+	*spaces = ft_atoi(flags->s_width) - len;
+	if (*spaces < 0)
+		*spaces = 0;
+	temp = *spaces;
+	if (!flags->minus)
+	{
+		while (temp-- > 0)
+			write(1, " ", 1);
+	}
+	write(1, "0x", 2);
+	if (flags->minus)
+	{
+		while (temp-- > 0)
+			write(1, " ", 1);
+	}
+	flags->count += len + *spaces;
 	(*format)++;
 }
 
@@ -62,31 +87,6 @@ void	ft_p_to_hex(unsigned long int ptr, char *hexa)
 		ft_swap_extra(&hexa[j], &hexa[i - j - 1]);
 		j++;
 	}
-}
-
-void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces)
-{
-	int		len;
-	int		temp;
-
-	len = 2;
-	*spaces = ft_atoi(flags->s_width) - len;
-	if (*spaces < 0)
-		*spaces = 0;
-	temp = *spaces;
-	if (!flags->minus)
-	{
-		while (temp-- > 0)
-			write(1, " ", 1);
-	}
-	write(1, "0x", 2);
-	if (flags->minus)
-	{
-		while (temp-- > 0)
-			write(1, " ", 1);
-	}
-	flags->count += len + *spaces;
-	(*format)++;
 }
 
 int	ft_calculate_p(t_flags *flags, int *spaces, int len)
