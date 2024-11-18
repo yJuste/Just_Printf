@@ -11,8 +11,11 @@ SRC =	ft_printf.c		\
 	ft_print_p.c		\
 	ft_print_d.c		\
 	ft_print_d_next.c	\
+	ft_print_u.c		\
+	ft_print_u_next.c	\
 	ft_printf_lib.c		\
 	ft_printf_lib_2.c	\
+	ft_printf_lib_3.c	\
 
 OBJ = $(SRC:.c=.o)
 

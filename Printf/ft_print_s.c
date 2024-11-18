@@ -40,6 +40,8 @@ int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len)
 	else
 		*len = ft_strlen(s);
 	width = ft_atoi(flags->s_width);
+	if (flags->star_ds == 2)
+		width = -width;
 	if (width <= *len)
 		width = *len;
 	*spaces = width - *len;

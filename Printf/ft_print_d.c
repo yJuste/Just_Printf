@@ -23,10 +23,6 @@ void	ft_print_d(int d, t_flags *flags, const char **format)
 {
 	t_decimal	dml;
 
-	dml.width = 0;
-	dml.spaces = 0;
-	dml.len = 0;
-	dml.precision = 0;
 	ft_calculate_d((long)d, flags, &dml);
 	ft_parse_d((long)d, flags, &dml);
 	(*format)++;
@@ -38,6 +34,8 @@ void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml)
 	if (d < 0)
 		dml->len--;
 	dml->width = ft_atoi(flags->s_width);
+	if (flags->plus || flags->space)
+		dml->width -= 1;
 	dml->precision = ft_atoi(flags->s_precision);
 	if (dml->precision > dml->len)
 		dml->precision -= dml->len;
@@ -49,22 +47,13 @@ void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-// Functions utils for print_d_next
+// ---------- Functions utils for print_d_next ----------
 
 void	ft_flags_space_and_plus_d(long d, t_flags *flags, t_decimal *dml)
 {
-	if (flags->space || flags->plus)
-	{
-		if (d >= 0)
-		{
-			if (flags->plus)
-				write(1, "+", 1);
-			else
-				write(1, " ", 1);
-			flags->count++;
-			dml->spaces--;
-		}
-	}
+	(void)d;
+	(void)flags;
+	(void)dml;
 	return ;
 }
 
@@ -92,6 +81,19 @@ void	ft_is_negative_d(long *d, t_flags *flags, t_decimal *dml)
 		write(1, "-", 1);
 		flags->count++;
 		dml->spaces--;
+		dml->neg = 1;
+	}
+	else if (flags->space || flags->plus)
+	{
+		if (dml->neg == 0)
+		{
+			if (flags->plus)
+				write(1, "+", 1);
+			else
+				write(1, " ", 1);
+			flags->count++;
+			dml->spaces--;
+		}
 	}
 	return ;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_c.c                                       :+:      :+:    :+:   */
+/*   ft_printf_lib_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,43 +11,49 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// -------------------------PROTOTYPE--------------------------
-void	ft_print_c(int c, t_flags *flags, const char **format);
-void	ft_parse_c(int c, t_flags *flags, int spaces);
-// ------------------------------------------------------------
+// -------------------PROTOTYPE-------------------
+void	ft_itoa_stack(int src, char *dest);
+void	ft_strdup_stack(char *src, char *dest);
+// -----------------------------------------------
 
-void	ft_print_c(int c, t_flags *flags, const char **format)
+void	ft_itoa_stack(int src, char *dest)
 {
-	int		width;
-	int		spaces;
+	int	len;
 
-	width = ft_atoi(flags->s_width);
-	if (width <= 1)
-		width = 1;
-	spaces = width - 1;
-	ft_parse_c(c, flags, spaces);
-	flags->count += width;
-	(*format)++;
+	len = ft_intlen((long)src);
+	dest[len] = '\0';
+	if (src == -2147483648)
+	{
+		ft_strdup_stack("-2147483648", dest);
+		return ;
+	}
+	if (src == 0)
+	{
+		dest[0] = '0';
+		dest[1] = '\0';
+		return ;
+	}
+	if (src < 0)
+	{
+		dest[0] = '-';
+		src = -src;
+	}
+	while (src)
+	{
+		dest[--len] = src % 10 + '0';
+		src /= 10;
+	}
 }
 
-void	ft_parse_c(int c, t_flags *flags, int spaces)
+void	ft_strdup_stack(char *src, char *dest)
 {
-	if (flags->minus)
+	int	i;
+
+	i = 0;
+	while (src[i])
 	{
-		write(1, &c, 1);
-		while (spaces-- > 0)
-			write(1, " ", 1);
+		dest[i] = src[i];
+		i++;
 	}
-	else
-	{
-		while (spaces-- > 0)
-		{
-			if (flags->zero)
-				write(1, "0", 1);
-			else
-				write(1, " ", 1);
-		}
-		write(1, &c, 1);
-	}
-	return ;
+	dest[i] = '\0';
 }

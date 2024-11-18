@@ -41,7 +41,12 @@ void	ft_parse_percent(t_flags *flags, int spaces)
 	else
 	{
 		while (spaces-- > 0)
-			write(1, " ", 1);
+		{
+			if (flags->zero)
+				write(1, "0", 1);
+			else
+				write(1, " ", 1);
+		}
 		write(1, "%", 1);
 	}
 	return ;

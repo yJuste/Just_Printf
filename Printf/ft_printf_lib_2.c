@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_lib.c                                    :+:      :+:    :+:   */
+/*   ft_printf_lib_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,15 +11,18 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// --------------------------PROTOTYPE-------------------------
+// --------------------PROTOTYPE----------------------
 int		ft_atoi(char *str);
 void	ft_putnbr(long nbr);
-// ------------------------------------------------------------
+void	ft_putnbr_uint(unsigned int nbr);
+void	ft_putnbr_hexa(unsigned int nbr, char format);
+void	ft_swap_extra(char *a, char *b);
+// ---------------------------------------------------
 
 int	ft_atoi(char *str)
 {
-	int	sign;
-	int	res;
+	int		sign;
+	int		res;
 
 	sign = 1;
 	res = 0;
@@ -41,11 +44,6 @@ void	ft_putnbr(long nbr)
 {
 	char		c;
 
-	if (nbr == LONG_MIN)
-	{
-		write(1, "-9223372036854775808", 20);
-		return ;
-	}
 	if (nbr < 0)
 	{
 		write(1, "-", 1);
@@ -61,4 +59,46 @@ void	ft_putnbr(long nbr)
 		c = nbr + '0';
 		write(1, &c, 1);
 	}
+}
+
+void	ft_putnbr_uint(unsigned int nbr)
+{
+	char		c;
+
+	if (nbr >= 10)
+	{
+		ft_putnbr_uint(nbr / 10);
+		ft_putnbr_uint(nbr % 10);
+	}
+	else
+	{
+		c = nbr + '0';
+		write(1, &c, 1);
+	}
+}
+
+void	ft_putnbr_hexa(unsigned int nbr, char format)
+{
+	const char		*digits;
+
+	if (format == 'x')
+		digits = "0123456789abcdef";
+	else if (format == 'X')
+		digits = "0123456789ABCDEF";
+	if (nbr >= 16)
+	{
+		ft_putnbr_hexa(nbr / 16, format);
+		ft_putnbr_hexa(nbr % 16, format);
+	}
+	else
+		write(1, &digits[nbr], 1);
+}
+
+void	ft_swap_extra(char *a, char *b)
+{
+	char		temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }

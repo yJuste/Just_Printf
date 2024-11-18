@@ -33,30 +33,35 @@ typedef struct s_flags
 	int		precision;
 	char	s_width[20];
 	char	s_precision[20];
-	char	s_zero[500];
 	int		count;
+	int		star_ds;
 }	t_flags;
 
 typedef struct s_decimal
 {
+	int		len;
 	int		width;
 	int		spaces;
-	int		len;
 	int		precision;
+	int		hex;
+	int		neg;
 }	t_decimal;
 
 // ft_printf.c
 
 int		ft_printf(const char *format, ...);
-void	ft_printf_recall(t_flags *flags, const char **format);
+void	ft_printf_recall(va_list *args, t_flags *flags, const char **format);
+void	ft_printf_arguments(va_list *args, t_flags *flags, const char **format);
 void	ft_print_and_count(t_flags *flags, const char **format);
 
 // ft_printf_2.c
 
-void	ft_flags(t_flags *flags, const char **format);
+void	ft_flags(va_list *args, t_flags *flags, const char **format);
+void	ft_flags_args(int arg, t_flags *flags, const char **format);
 void	ft_flags_next(t_flags *flags, const char **format, int i, int k);
 void	ft_flags_next_2(t_flags *flags, const char **format, int i);
-void	ft_flags_init(t_flags *flags);
+void	ft_flags_init(t_flags *flags, t_decimal *dml);
+void	ft_flags_next_3(t_flags *flags, char *format, int i, int k);
 
 // ft_print_percent.c
 
@@ -98,17 +103,41 @@ void	ft_parse_next_d(long d, t_flags *flags, t_decimal *dml);
 void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml);
 void	ft_flags_space_and_plus_d(long d, t_flags *flags, t_decimal *dml);
 
+// ft_print_u.c
+
+void	ft_print_u(unsigned int u, t_flags *flags, const char **format);
+void	ft_calculate_u( unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_precision_and_null_u(unsigned int u,
+		t_flags *flags, t_decimal *dml);
+
+// ft_print_u_next.c
+
+void	ft_parse_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_minus_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_next_zero_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_2_u(unsigned int u, t_flags *flags, t_decimal *dml);
+
 // ft_printf_lib.c
 
-int		ft_min(int a, int b);
 int		ft_intlen(long n);
+int		ft_uintlen(unsigned int n);
+int		ft_uintlen_hexa(unsigned int n);
+int		ft_min(int a, int b);
 size_t	ft_strlen(const char *s);
-void	ft_putstr(char *str);
-void	ft_swap_extra(char *a, char *b);
 
 // ft_printf_lib_2.c
 
 int		ft_atoi(char *str);
 void	ft_putnbr(long nbr);
+void	ft_putnbr_uint(unsigned int nbr);
+void	ft_putnbr_hexa(unsigned int nbr, char format);
+void	ft_swap_extra(char *a, char *b);
+
+// ft_printf_lib_3.c
+
+void	ft_itoa_stack(int src, char *dest);
+void	ft_strdup_stack(char *src, char *dest);
 
 #endif
