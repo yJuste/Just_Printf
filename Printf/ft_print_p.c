@@ -27,7 +27,7 @@ void	ft_print_p(void *p, t_flags *flags, const char **format)
 	char	hexa[17];
 
 	len = 0;
-	if (!p && flags->precision)
+	if (!p)
 		return (ft_no_pointeur(flags, format, &spaces));
 	ft_p_to_hex((unsigned long int)p, hexa);
 	len = ft_strlen(hexa) + 2;
@@ -109,7 +109,7 @@ void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces)
 	int		len;
 	int		temp;
 
-	len = 2;
+	len = 5;
 	*spaces = ft_atoi(flags->s_width) - len;
 	if (*spaces < 0)
 		*spaces = 0;
@@ -119,7 +119,8 @@ void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces)
 		while (temp-- > 0)
 			write(1, " ", 1);
 	}
-	write(1, "0x", 2);
+	if (!flags->precision)
+		write(1, "(nil)", 5);
 	if (flags->minus)
 	{
 		while (temp-- > 0)
