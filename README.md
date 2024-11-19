@@ -3,7 +3,7 @@
 ## // INTRO
 
 * Voici le Milestone 1, le projet : ft_printf 
-* En cours.
+* 125%
 
 ## /. HELP
 
