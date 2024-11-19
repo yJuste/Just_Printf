@@ -13,9 +13,9 @@
 
 // -----------------------------PROTOTYPE----------------------------
 void	ft_print_di(int d, t_flags *flags, const char **format);
-void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_print_and_null_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_neg_space_plus_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_calculate_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_print_and_null_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml);
 // ------------------------------------------------------------------
 
 void	ft_print_di(int d, t_flags *flags, const char **format)
@@ -23,13 +23,13 @@ void	ft_print_di(int d, t_flags *flags, const char **format)
 	t_decimal	dml;
 
 	ft_dml_init(&dml);
-	ft_calculate_d((long)d, flags, &dml);
-	ft_parse_d((long)d, flags, &dml);
+	ft_calculate_di((long)d, flags, &dml);
+	ft_parse_di((long)d, flags, &dml);
 	(*format)++;
 	return ;
 }
 
-void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml)
+void	ft_calculate_di(long d, t_flags *flags, t_decimal *dml)
 {
 	dml->len = ft_intlen(d);
 	if (d < 0)
@@ -50,9 +50,9 @@ void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-// ---------- Functions utils for print_d_next ----------
+// ---------- Functions utils for print_di_next ----------
 
-void	ft_print_and_null_d(long d, t_flags *flags, t_decimal *dml)
+void	ft_print_and_null_di(long d, t_flags *flags, t_decimal *dml)
 {
 	if (!d && flags->precision && !ft_atoi(flags->s_precision))
 	{
@@ -73,7 +73,7 @@ void	ft_print_and_null_d(long d, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-void	ft_neg_space_plus_d(long *d, t_flags *flags, t_decimal *dml)
+void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml)
 {
 	if (*d < 0)
 	{

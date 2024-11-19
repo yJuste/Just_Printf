@@ -12,31 +12,31 @@
 #include "ft_printf.h"
 
 // -----------------------------PROTOTYPE-----------------------------
-void	ft_parse_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_flags_minus_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_flags_next_zero_d(long *d, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_parse_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_minus_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_next_zero_di(long *d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_2_di(long *d, t_flags *flags, t_decimal *dml);
 // -------------------------------------------------------------------
 
-void	ft_parse_d(long d, t_flags *flags, t_decimal *dml)
+void	ft_parse_di(long d, t_flags *flags, t_decimal *dml)
 {
 	if (flags->minus)
-		ft_flags_minus_d(d, flags, dml);
+		ft_flags_minus_di(d, flags, dml);
 	else
-		ft_parse_next_d(d, flags, dml);
+		ft_parse_next_di(d, flags, dml);
 	return ;
 }
 
-void	ft_flags_minus_d(long d, t_flags *flags, t_decimal *dml)
+void	ft_flags_minus_di(long d, t_flags *flags, t_decimal *dml)
 {
-	ft_neg_space_plus_d(&d, flags, dml);
+	ft_neg_space_plus_di(&d, flags, dml);
 	while (dml->precision-- > 0)
 	{
 		write(1, "0", 1);
 		flags->count++;
 	}
-	ft_print_and_null_d(d, flags, dml);
+	ft_print_and_null_di(d, flags, dml);
 	flags->count += ft_intlen(d);
 	if (flags->plus || flags->space)
 		dml->spaces += 1;
@@ -48,26 +48,26 @@ void	ft_flags_minus_d(long d, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-void	ft_parse_next_d(long d, t_flags *flags, t_decimal *dml)
+void	ft_parse_next_di(long d, t_flags *flags, t_decimal *dml)
 {
 	if (flags->zero)
-		ft_flags_next_zero_d(&d, flags, dml);
+		ft_flags_next_zero_di(&d, flags, dml);
 	else
-		ft_parse_next_2_d(&d, flags, dml);
+		ft_parse_next_2_di(&d, flags, dml);
 	while (dml->precision-- > 0)
 	{
 		write(1, "0", 1);
 		flags->count++;
 	}
-	ft_print_and_null_d(d, flags, dml);
+	ft_print_and_null_di(d, flags, dml);
 	flags->count += ft_intlen(d);
 	return ;
 }
 
-void	ft_flags_next_zero_d(long *d, t_flags *flags, t_decimal *dml)
+void	ft_flags_next_zero_di(long *d, t_flags *flags, t_decimal *dml)
 {
 	if (!flags->precision || flags->star_ds == 1)
-		ft_neg_space_plus_d(d, flags, dml);
+		ft_neg_space_plus_di(d, flags, dml);
 	if (flags->precision)
 	{
 		if (*d < 0)
@@ -89,11 +89,11 @@ void	ft_flags_next_zero_d(long *d, t_flags *flags, t_decimal *dml)
 		flags->count++;
 	}
 	if (flags->precision && !flags->star_ds)
-		ft_neg_space_plus_d(d, flags, dml);
+		ft_neg_space_plus_di(d, flags, dml);
 	return ;
 }
 
-void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml)
+void	ft_parse_next_2_di(long *d, t_flags *flags, t_decimal *dml)
 {
 	if (*d < 0 && !flags->plus && !flags->space)
 		dml->spaces--;
@@ -114,6 +114,6 @@ void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml)
 			}
 		}
 	}
-	ft_neg_space_plus_d(d, flags, dml);
+	ft_neg_space_plus_di(d, flags, dml);
 	return ;
 }

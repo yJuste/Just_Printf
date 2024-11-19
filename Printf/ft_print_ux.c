@@ -13,12 +13,12 @@
 
 // -------------------------------PROTOTYPE---------------------------------
 void	ft_print_ux(unsigned int u, t_flags *flags, const char **format);
-void	ft_calculate_u( unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_print_and_null_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_calculate_ux( unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_hashtag_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_print_and_null_ux(unsigned int u, t_flags *flags, t_decimal *dml);
 // -------------------------------------------------------------------------
 
-void	ft_print_ux(unsigned int u, t_flags *flags, const char **format)
+void	ft_print_uxx(unsigned int u, t_flags *flags, const char **format)
 {
 	t_decimal	dml;
 
@@ -29,13 +29,13 @@ void	ft_print_ux(unsigned int u, t_flags *flags, const char **format)
 		dml.hex = 2;
 	else
 		dml.hex = 0;
-	ft_calculate_u((unsigned int)u, flags, &dml);
-	ft_parse_u((unsigned int)u, flags, &dml);
+	ft_calculate_ux((unsigned int)u, flags, &dml);
+	ft_parse_ux((unsigned int)u, flags, &dml);
 	(*format)++;
 	return ;
 }
 
-void	ft_calculate_u(unsigned int u, t_flags *flags, t_decimal *dml)
+void	ft_calculate_ux(unsigned int u, t_flags *flags, t_decimal *dml)
 {
 	if (dml->hex == 1 || dml->hex == 2)
 		dml->len = ft_uintlen_hexa(u);
@@ -55,9 +55,9 @@ void	ft_calculate_u(unsigned int u, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-// ---------- Functions utils for print_u_next ----------
+// ---------- Functions utils for print_ux_next ----------
 
-void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml)
+void	ft_flags_hashtag_ux(unsigned int u, t_flags *flags, t_decimal *dml)
 {
 	if (flags->hashtag)
 	{
@@ -74,7 +74,7 @@ void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-void	ft_print_and_null_u(unsigned int u, t_flags *flags, t_decimal *dml)
+void	ft_print_and_null_ux(unsigned int u, t_flags *flags, t_decimal *dml)
 {
 	if (!u && flags->precision && !ft_atoi(flags->s_precision))
 	{

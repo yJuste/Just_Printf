@@ -90,32 +90,32 @@ void	ft_no_pointeur(t_flags *flags, const char **format, int *spaces);
 // ft_print_di.c
 
 void	ft_print_di(int d, t_flags *flags, const char **format);
-void	ft_calculate_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_print_and_null_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_neg_space_plus_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_calculate_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_print_and_null_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml);
 
-// ft_print_d_next.c
+// ft_print_di_next.c
 
-void	ft_parse_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_flags_minus_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_d(long d, t_flags *flags, t_decimal *dml);
-void	ft_flags_next_zero_d(long *d, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_2_d(long *d, t_flags *flags, t_decimal *dml);
+void	ft_parse_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_minus_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_di(long d, t_flags *flags, t_decimal *dml);
+void	ft_flags_next_zero_di(long *d, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_2_di(long *d, t_flags *flags, t_decimal *dml);
 
 // ft_print_u.c
 
 void	ft_print_ux(unsigned int u, t_flags *flags, const char **format);
-void	ft_calculate_u( unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_print_and_null_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_calculate_ux( unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_hashtag_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_print_and_null_ux(unsigned int u, t_flags *flags, t_decimal *dml);
 
 // ft_print_u_next.c
 
-void	ft_parse_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_flags_minus_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_flags_next_zero_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_parse_next_2_u(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_parse_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_minus_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_flags_next_zero_ux(unsigned int u, t_flags *flags, t_decimal *dml);
+void	ft_parse_next_2_ux(unsigned int u, t_flags *flags, t_decimal *dml);
 
 // ft_printf_lib.c
 
