@@ -29,6 +29,7 @@ void	ft_print_s(char *s, t_flags *flags, const char **format)
 	ft_parse_s(s, flags, spaces, len);
 	flags->count += width;
 	(*format)++;
+	return ;
 }
 
 int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len)
@@ -39,9 +40,9 @@ int	ft_calculate_s(char *s, t_flags *flags, int *spaces, int *len)
 		*len = ft_min(ft_strlen(s), ft_atoi(flags->s_precision));
 	else
 		*len = ft_strlen(s);
+	if (flags->star_ds == 1)
+		*len = ft_strlen(s);
 	width = ft_atoi(flags->s_width);
-	if (flags->star_ds == 2)
-		width = -width;
 	if (width <= *len)
 		width = *len;
 	*spaces = width - *len;

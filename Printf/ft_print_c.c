@@ -28,6 +28,7 @@ void	ft_print_c(int c, t_flags *flags, const char **format)
 	ft_parse_c(c, flags, spaces);
 	flags->count += width;
 	(*format)++;
+	return ;
 }
 
 void	ft_parse_c(int c, t_flags *flags, int spaces)

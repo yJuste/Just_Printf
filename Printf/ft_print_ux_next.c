@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_u_next.c                                  :+:      :+:    :+:   */
+/*   ft_print_ux_next.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// ---------------------------------PROTOTYPE---------------------------------
+// --------------------------------PROTOTYPE---------------------------------
 void	ft_parse_u(unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_flags_minus_u(unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_parse_next_u(unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_flags_next_zero_u(unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_parse_next_2_u(unsigned int u, t_flags *flags, t_decimal *dml);
-// ---------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 
 void	ft_parse_u(unsigned int u, t_flags *flags, t_decimal *dml)
 {
@@ -37,7 +37,7 @@ void	ft_flags_minus_u(unsigned int u, t_flags *flags, t_decimal *dml)
 		write(1, "0", 1);
 		flags->count++;
 	}
-	ft_flags_precision_and_null_u(u, flags, dml);
+	ft_print_and_null_u(u, flags, dml);
 	if (dml->hex == 1 || dml->hex == 2)
 		flags->count += ft_uintlen_hexa(u);
 	else
@@ -61,7 +61,7 @@ void	ft_parse_next_u(unsigned int u, t_flags *flags, t_decimal *dml)
 		write(1, "0", 1);
 		flags->count++;
 	}
-	ft_flags_precision_and_null_u(u, flags, dml);
+	ft_print_and_null_u(u, flags, dml);
 	if (dml->hex == 1 || dml->hex == 2)
 		flags->count += ft_uintlen_hexa(u);
 	else
@@ -77,7 +77,7 @@ void	ft_flags_next_zero_u(unsigned int u, t_flags *flags, t_decimal *dml)
 		ft_flags_hashtag_u(u, flags, dml);
 	while (dml->spaces-- > 0)
 	{
-		if (flags->precision)
+		if (flags->precision && !flags->star_ds)
 			write(1, " ", 1);
 		else
 			write(1, "0", 1);

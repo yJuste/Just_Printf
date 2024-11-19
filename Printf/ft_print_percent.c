@@ -28,6 +28,7 @@ void	ft_print_percent(t_flags *flags, const char **format)
 	ft_parse_percent(flags, spaces);
 	flags->count += width;
 	(*format)++;
+	return ;
 }
 
 void	ft_parse_percent(t_flags *flags, int spaces)

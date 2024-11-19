@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_u.c                                       :+:      :+:    :+:   */
+/*   ft_print_ux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:                                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-// -------------------------------PROTOTYPE--------------------------------
-void	ft_print_u(unsigned int u, t_flags *flags, const char **format);
+// -------------------------------PROTOTYPE---------------------------------
+void	ft_print_ux(unsigned int u, t_flags *flags, const char **format);
 void	ft_calculate_u( unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml);
-void	ft_flags_precision_and_null_u(unsigned int u,
-		t_flags *flags, t_decimal *dml);
-void	ft_is_negative_u(unsigned int *u, t_flags *flags, t_decimal *dml);
-// ------------------------------------------------------------------------
+void	ft_print_and_null_u(unsigned int u, t_flags *flags, t_decimal *dml);
+// -------------------------------------------------------------------------
 
-void	ft_print_u(unsigned int u, t_flags *flags, const char **format)
+void	ft_print_ux(unsigned int u, t_flags *flags, const char **format)
 {
 	t_decimal	dml;
 
+	ft_dml_init(&dml);
 	if (**format == 'x')
 		dml.hex = 1;
 	else if (**format == 'X')
@@ -33,6 +32,7 @@ void	ft_print_u(unsigned int u, t_flags *flags, const char **format)
 	ft_calculate_u((unsigned int)u, flags, &dml);
 	ft_parse_u((unsigned int)u, flags, &dml);
 	(*format)++;
+	return ;
 }
 
 void	ft_calculate_u(unsigned int u, t_flags *flags, t_decimal *dml)
@@ -46,6 +46,8 @@ void	ft_calculate_u(unsigned int u, t_flags *flags, t_decimal *dml)
 	if (dml->precision > dml->len)
 		dml->precision -= dml->len;
 	else
+		dml->precision = 0;
+	if (flags->star_ds == 1)
 		dml->precision = 0;
 	dml->spaces = dml->width - (dml->len + dml->precision);
 	if (dml->spaces < 0)
@@ -72,8 +74,7 @@ void	ft_flags_hashtag_u(unsigned int u, t_flags *flags, t_decimal *dml)
 	return ;
 }
 
-void	ft_flags_precision_and_null_u(unsigned int u,
-		t_flags *flags, t_decimal *dml)
+void	ft_print_and_null_u(unsigned int u, t_flags *flags, t_decimal *dml)
 {
 	if (!u && flags->precision && !ft_atoi(flags->s_precision))
 	{

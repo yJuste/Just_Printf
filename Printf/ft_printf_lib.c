@@ -15,8 +15,8 @@
 int		ft_intlen(long n);
 int		ft_uintlen(unsigned int n);
 int		ft_uintlen_hexa(unsigned int n);
-int		ft_min(int a, int b);
 size_t	ft_strlen(const char *s);
+int		ft_min(int a, int b);
 // ----------------------------------------------
 
 int	ft_intlen(long n)
@@ -24,8 +24,6 @@ int	ft_intlen(long n)
 	int		len;
 
 	len = 0;
-	if (n == LONG_MIN)
-		return (20);
 	if (n < 0)
 	{
 		n = -n;
@@ -71,13 +69,6 @@ int	ft_uintlen_hexa(unsigned int n)
 	return (len);
 }
 
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t		i;
@@ -88,4 +79,11 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }
