@@ -93,6 +93,7 @@ void	ft_print_di(int d, t_flags *flags, const char **format);
 void	ft_calculate_di(long d, t_flags *flags, t_decimal *dml);
 void	ft_print_and_null_di(long d, t_flags *flags, t_decimal *dml);
 void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml);
+void	ft_special_case_di(long *d, t_flags *flags, t_decimal *dml);
 
 // ft_print_di_next.c
 

@@ -18,7 +18,7 @@ void	ft_flags_hashtag_ux(unsigned int u, t_flags *flags, t_decimal *dml);
 void	ft_print_and_null_ux(unsigned int u, t_flags *flags, t_decimal *dml);
 // -------------------------------------------------------------------------
 
-void	ft_print_uxx(unsigned int u, t_flags *flags, const char **format)
+void	ft_print_ux(unsigned int u, t_flags *flags, const char **format)
 {
 	t_decimal	dml;
 
@@ -68,7 +68,8 @@ void	ft_flags_hashtag_ux(unsigned int u, t_flags *flags, t_decimal *dml)
 			else if (dml->hex == 2)
 				write(1, "0X", 2);
 			flags->count += 2;
-			dml->spaces -= 2;
+			if (flags->minus)
+				dml->spaces -= 2;
 		}
 	}
 	return ;

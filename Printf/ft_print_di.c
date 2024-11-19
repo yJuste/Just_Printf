@@ -16,6 +16,7 @@ void	ft_print_di(int d, t_flags *flags, const char **format);
 void	ft_calculate_di(long d, t_flags *flags, t_decimal *dml);
 void	ft_print_and_null_di(long d, t_flags *flags, t_decimal *dml);
 void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml);
+void	ft_special_case_di(long *d, t_flags *flags, t_decimal *dml);
 // ------------------------------------------------------------------
 
 void	ft_print_di(int d, t_flags *flags, const char **format)
@@ -95,5 +96,27 @@ void	ft_neg_space_plus_di(long *d, t_flags *flags, t_decimal *dml)
 			dml->spaces--;
 		}
 	}
+	return ;
+}
+
+void	ft_special_case_di(long *d, t_flags *flags, t_decimal *dml)
+{
+	if (flags->precision && ft_atoi(flags->s_precision) && *d < 0
+		&& ft_atoi(flags->s_width) < ft_atoi(flags->s_precision))
+		dml->spaces--;
+	if (!ft_atoi(flags->s_precision))
+	{
+		if (flags->precision && *d < 0
+			&& ft_atoi(flags->s_width) < ft_atoi(flags->s_precision))
+			dml->spaces--;
+	}
+	if (*d < 0 && !flags->plus && !flags->space)
+		dml->spaces--;
+	if (flags->precision
+		&& *d < 0
+		&& ft_atoi(flags->s_width) > ft_atoi(flags->s_precision)
+		&& (flags->plus || flags->space)
+		&& !ft_atoi(flags->s_precision))
+		dml->spaces--;
 	return ;
 }

@@ -68,16 +68,13 @@ void	ft_flags_next_zero_di(long *d, t_flags *flags, t_decimal *dml)
 {
 	if (!flags->precision || flags->star_ds == 1)
 		ft_neg_space_plus_di(d, flags, dml);
-	if (flags->precision)
-	{
-		if (*d < 0)
-			dml->spaces--;
-	}
+	ft_special_case_di(d, flags, dml);
 	if (flags->plus == 1 || flags->space == 1)
 	{
 		if (!flags->precision)
 			dml->spaces++;
-		if (*d <= 0 && flags->precision && ft_atoi(flags->s_width) > 1)
+		if (*d <= 0 && flags->precision && ft_atoi(flags->s_width) > 1
+			&& !ft_atoi(flags->s_precision))
 			dml->spaces++;
 	}
 	while (dml->spaces-- > 0)
