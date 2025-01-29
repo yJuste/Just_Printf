@@ -58,6 +58,8 @@ int	ft_put_ptr(void *ptr)
 {
 	int		count;
 
+	if (!ptr)
+		return (write(1, "(nil)", 5), 5);
 	count = ft_putvoidptr((unsigned long)ptr);
 	return (count);
 }
